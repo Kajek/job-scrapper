@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6d604ab-ef8e-4761-b05b-ce83065fa3f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/src/main/java/pl/sda/JobScrapperApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job-scrapper/src/test/java/pl/sda/JobScrapperApplicationTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="a6d604ab-ef8e-4761-b05b-ce83065fa3f2" name="Changes" comment="initial commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +33,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/job-scrapper" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
@@ -56,6 +46,21 @@
       <option name="presentableId" value="Default" />
       <updated>1658046659193</updated>
     </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1658047045276</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658047045276</updated>
+    </task>
+    <task id="LOCAL-00002" summary="initial commit">
+      <created>1658047127194</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1658047127194</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -71,5 +76,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
   </component>
 </project>

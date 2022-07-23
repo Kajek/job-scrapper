@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h1>Filtering is Fun!</h1>
+
+
+<div th:each="offer: ${offers}">
+  <h4 th:text="${offer.title}" ></h4>
+  <h4 th:text="${offer.company}" ></h4>
+  <h4 th:text="${offer.location}" ></h4>
+  <h4 th:text="${offer.salary}" ></h4>
+  <h4> <a th:href="@{${offer.link}}" >Link do ogłoszenia</a> </h4>
+  <h4 th:text="${offer.link}" ></h4>
+
+  <h3>=============================</h3>
+</div>
+
+</body>
+</html>

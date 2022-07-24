@@ -5,8 +5,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -23,14 +26,31 @@ public class plainScrapper {
             String company = jobOffer.getElementsByClass("d-block").text();
             String location = jobOffer.getElementsByClass("mr-1").text();
             String link = jobOffer.attr("href");
-            String salary = jobOffer.getElementsByAttributeValue("data-cy", "salary ranges on the job offer listing").text();
-            String [] salarySplit = salary.split("-");
+            String salary = jobOffer.getElementsByAttributeValue("data-cy", "salary ranges on the job offer listing").html().toString().replaceAll("&nbsp;","").trim();
+
+            List<String> result = null;
             System.out.println(title);
             System.out.println(company);
             System.out.println(location);
             System.out.println("https://nofluffjobs.com"+link);
             System.out.println(salary);
-            System.out.println(Arrays.toString(salarySplit));
+
+            Pattern p = Pattern.compile("\\d+");
+            Matcher m = p.matcher(salary);
+            if(m.find()) {
+//                System.out.println(m.group());
+                result = new ArrayList<String>();
+                result.add(m.group());
+                while (m.find()){
+                    result.add(m.group());
+                }
+            }
+            System.out.println(result);
+
+//            System.out.println(Arrays.toString(salarySplit).trim());
+//            System.out.println(salarySplit[0]);
+//            int minSalary = Integer.valueOf(salarySplit[0].replace("\u00a0","").trim());
+//            System.out.println(minSalary);
             System.out.println("======================================================");
         }
 //        for (Element jobOffer: document.getElementsByTag("nfj-search-results")){

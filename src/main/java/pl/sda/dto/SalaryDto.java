@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class SalaryDto {
 
-    private String salary;
+    private Double minSalary;
+    private Double maxSalary;
 
 }

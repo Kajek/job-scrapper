@@ -50,14 +50,16 @@ public class JobOfferServiceImpl implements JobOfferService {
         return offersFilteredByLocation;
     }
 
+    @Override
     public List<JobOffer> filterBySalary(SalaryDto salaryDto){
         List<JobOffer> allOffers = jobOfferRepository.getAll();
         List<JobOffer> offersFilteredBySalary = new ArrayList<>();
-        String minSalary;
-        String maxSalary;
 
-
-
+        for(JobOffer jobOffer: allOffers){
+            if((jobOffer.getSalaryRange().getMinSalary() >= salaryDto.getMinSalary()) && (jobOffer.getSalaryRange().getMaxSalary() <= salaryDto.getMaxSalary())){
+                offersFilteredBySalary.add(jobOffer);
+            }
+        }
         return offersFilteredBySalary;
     }
 

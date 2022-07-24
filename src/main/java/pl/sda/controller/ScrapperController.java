@@ -43,15 +43,16 @@ public class ScrapperController {
     }
 
     @GetMapping("/index/location")
-    public String fiteredByLocation(@ModelAttribute("locationDto") LocationDto locationDto, ModelMap modelMap){
+    public String filterByLocation(@ModelAttribute("locationDto") LocationDto locationDto, ModelMap modelMap){
         List<JobOffer> offers = jobOfferService.filterByLocation(locationDto);
         modelMap.addAttribute("offers", offers);
         return "index-location";
     }
 
     @GetMapping("/index/salary")
-    public String fiteredBySalary(@ModelAttribute("salaryDto") SalaryDto salaryDto, ModelMap modelMap){
-
+    public String filterBySalary(@ModelAttribute("salaryDto") SalaryDto salaryDto, ModelMap modelMap){
+        List<JobOffer> offers = jobOfferService.filterBySalary(salaryDto);
+        modelMap.addAttribute("offers", offers);
 
         return "index-salary";
     }
@@ -59,6 +60,11 @@ public class ScrapperController {
     @ModelAttribute("locationDto")
     public void locationDto(Model model){
         model.addAttribute(new LocationDto());
+    }
+
+    @ModelAttribute("salaryDto")
+    public void salaryDto(Model model){
+        model.addAttribute(new SalaryDto());
     }
 
 

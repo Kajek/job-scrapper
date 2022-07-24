@@ -1,4 +1,4 @@
-package pl.sda.jobScrapper;
+package pl.sda.jobOffer;
 
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
@@ -59,7 +59,7 @@ public class ScrapperController {
 
     @ModelAttribute("salaryDto")
     public void salaryDto(Model model){
-        model.addAttribute(new SalaryDto());
+        model.addAttribute(new SalaryDto(0.0,9999.0));
     }
 
 

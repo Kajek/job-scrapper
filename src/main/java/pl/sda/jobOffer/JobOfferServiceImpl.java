@@ -1,12 +1,7 @@
-package pl.sda.service.impl;
+package pl.sda.jobOffer;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import pl.sda.dto.LocationDto;
-import pl.sda.dto.SalaryDto;
-import pl.sda.model.JobOffer;
-import pl.sda.repository.JobOfferRepository;
-import pl.sda.repository.JobScrapper;
-import pl.sda.service.JobOfferService;
+import pl.sda.jobScrapper.JobScrapper;
 
 import java.util.ArrayList;
 import java.util.List;

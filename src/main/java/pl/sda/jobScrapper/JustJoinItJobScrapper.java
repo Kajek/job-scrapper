@@ -1,8 +1,6 @@
-package pl.sda.repository.impl;
+package pl.sda.jobScrapper;
 
-import org.springframework.stereotype.Component;
-import pl.sda.model.JobOffer;
-import pl.sda.repository.JobScrapper;
+import pl.sda.jobOffer.JobOffer;
 
 import java.util.List;
 

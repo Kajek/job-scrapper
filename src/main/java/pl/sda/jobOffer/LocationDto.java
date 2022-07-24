@@ -1,4 +1,4 @@
-package pl.sda.dto;
+package pl.sda.jobOffer;
 
 
 import lombok.*;

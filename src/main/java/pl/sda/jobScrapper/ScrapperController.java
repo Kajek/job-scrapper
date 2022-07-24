@@ -1,22 +1,17 @@
-package pl.sda.controller;
+package pl.sda.jobScrapper;
 
 import lombok.SneakyThrows;
-import org.jsoup.Jsoup;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import pl.sda.dto.LocationDto;
-import pl.sda.dto.SalaryDto;
-import pl.sda.model.JobOffer;
-import pl.sda.service.JobOfferService;
+import pl.sda.jobOffer.LocationDto;
+import pl.sda.jobOffer.SalaryDto;
+import pl.sda.jobOffer.JobOffer;
+import pl.sda.jobOffer.JobOfferService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class ScrapperController {

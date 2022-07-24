@@ -1,8 +1,4 @@
-package pl.sda.service;
-
-import pl.sda.dto.LocationDto;
-import pl.sda.dto.SalaryDto;
-import pl.sda.model.JobOffer;
+package pl.sda.jobOffer;
 
 import java.util.List;
 

@@ -2,12 +2,12 @@ package pl.sda;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.sda.repository.JobOfferRepository;
-import pl.sda.repository.JobScrapper;
-import pl.sda.repository.impl.JustJoinItJobScrapper;
-import pl.sda.repository.impl.NoFluffJobsJobScrapper;
-import pl.sda.service.JobOfferService;
-import pl.sda.service.impl.JobOfferServiceImpl;
+import pl.sda.jobOffer.JobOfferRepository;
+import pl.sda.jobScrapper.JobScrapper;
+import pl.sda.jobScrapper.JustJoinItJobScrapper;
+import pl.sda.jobScrapper.NoFluffJobsJobScrapper;
+import pl.sda.jobOffer.JobOfferService;
+import pl.sda.jobOffer.JobOfferServiceImpl;
 
 import java.util.List;
 

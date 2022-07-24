@@ -1,6 +1,6 @@
-package pl.sda.repository;
+package pl.sda.jobScrapper;
 
-import pl.sda.model.JobOffer;
+import pl.sda.jobOffer.JobOffer;
 
 import java.util.List;
 

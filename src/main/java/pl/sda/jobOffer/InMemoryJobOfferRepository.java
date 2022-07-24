@@ -1,8 +1,6 @@
-package pl.sda.repository.impl;
+package pl.sda.jobOffer;
 
 import org.springframework.stereotype.Component;
-import pl.sda.model.JobOffer;
-import pl.sda.repository.JobOfferRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;

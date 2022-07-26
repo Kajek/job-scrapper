@@ -1,16 +1,12 @@
 package pl.sda.jobOffer;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface JobOfferRepository {
 
-    //extends JpaRepository<JobOffer, String>
-    // dodać zależność SpringData
+public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
 
-    List<JobOffer> getAll();
-    void replaceAll(List<JobOffer> jobOffers);
 
 }

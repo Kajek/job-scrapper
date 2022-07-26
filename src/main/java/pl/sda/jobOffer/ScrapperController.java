@@ -26,7 +26,7 @@ public class ScrapperController {
     @GetMapping("/index")
     public String index(ModelMap modelMap) {
 
-        List<JobOffer> offers = jobOfferService.getAll();
+        List<JobOffer> offers = jobOfferService.findAll();
 
         modelMap.addAttribute("offers", offers);
         return "index";

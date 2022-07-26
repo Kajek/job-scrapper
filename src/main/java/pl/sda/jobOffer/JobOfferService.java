@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface JobOfferService {
 
-    List<JobOffer> getAll();
+    List<JobOffer> findAll();
     List<JobOffer> filterByLocation(LocationDto locationDto);
     List<JobOffer> filterBySalary(SalaryDto salaryDto);
 }

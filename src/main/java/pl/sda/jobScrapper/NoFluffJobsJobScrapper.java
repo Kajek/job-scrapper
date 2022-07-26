@@ -34,7 +34,7 @@ public class NoFluffJobsJobScrapper implements JobScrapper {
                     String salary = jobOffer.getElementsByAttributeValue("data-cy", "salary ranges on the job offer listing").html().toString().replaceAll("&nbsp;","").trim();
                     String link = jobOffer.attr("href");
 
-//                    JobOffer.SalaryRange salaryRange = new JobOffer.SalaryRange();
+
                     JobOffer.SalaryRange salaryRange = populateSalaryRange(salaryList(salary));
 
                     offers.add(new JobOffer(title, company, location, salaryRange, link));

@@ -59,18 +59,14 @@ public class ScrapperController {
 
     @ModelAttribute("salaryDto")
     public void salaryDto(Model model){
-        model.addAttribute(new SalaryDto(0.0,9999.0));
+        model.addAttribute(new SalaryDto());
     }
 
 
-    // TODO
+    // TODO overall
     // zrobić button dla no fluff jobs, ew innych stron --
-    // link w ofercie przerobić na hyperlink? ++
-    // posprzątać strukture ofc - w sumie zrobione ++
-    // wysyłać zapytania z .timeout(ileś tam) - w sumie zrobione ++
-    // sobota - poprawić strukturę pobieranego obiektu - ustalić na 100% jak ma wygładać model ++
     // dodać inny serwis? justJoinit?
-    // zacząć pracować nad BD?
+
 
 
 

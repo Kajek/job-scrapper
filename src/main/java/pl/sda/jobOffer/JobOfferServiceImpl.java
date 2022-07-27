@@ -1,5 +1,6 @@
 package pl.sda.jobOffer;
 
+
 import org.springframework.scheduling.annotation.Scheduled;
 import pl.sda.jobScrapper.JobScrapper;
 
@@ -14,30 +15,38 @@ public class JobOfferServiceImpl implements JobOfferService {
     private final List<JobScrapper> jobScrappers;
     private final JobOfferRepository jobOfferRepository;
 
-    List<JobOffer> jobOffers = new ArrayList<>();
 
-
-    public JobOfferServiceImpl(List<JobScrapper> jobScrappers, JobOfferRepository jobOfferRepository){
+    public JobOfferServiceImpl(List<JobScrapper> jobScrappers, JobOfferRepository jobOfferRepository) {
         this.jobScrappers = jobScrappers;
         this.jobOfferRepository = jobOfferRepository;
     }
 
-
-    @Scheduled(fixedDelay = 2,timeUnit = TimeUnit.HOURS)
-    public void populateRepository(){
-        jobOfferRepository.deleteAllInBatch(jobOffers);
-        List<JobOffer> jobOffers = jobScrappers.stream().flatMap(e -> e.getJobOffers().stream()).collect(Collectors.toList());
-        jobOfferRepository.saveAll(jobOffers);
+    @Scheduled(fixedDelay = 2, timeUnit = TimeUnit.HOURS)
+    public void populateRepository() {
+        jobOfferRepository.deleteAllInBatch();
+        List<JobOfferEntity> jobOffersEntityList = jobScrappers
+                .stream()
+                .flatMap(e -> e.getJobOffers().stream())
+                .map(e -> JobOfferEntity.from(e))
+                .collect(Collectors.toList());
+        jobOfferRepository.saveAll(jobOffersEntityList);
         System.out.println("populating repository");
     }
 
     @Override
     public List<JobOffer> findAll() {
-        return jobOfferRepository.findAll();
+        return jobOfferRepository.
+                findAll().
+                stream().
+                map(e -> JobOffer.from(e))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<JobOffer> filterByLocation(LocationDto locationDto) {
+//        return jobOfferRepository.findByLocation(locationDto.getLocation()).stream()
+//                .map(e -> JobOffer.from(e))
+//                .collect(Collectors.toList()); //problem z uwzględnieniem wielkości liter i końcówek PL
         List<JobOffer> allOffers = findAll();
         List<JobOffer> offersFilteredByLocation = new ArrayList<>();
         for (JobOffer jobOffer: allOffers){
@@ -49,17 +58,49 @@ public class JobOfferServiceImpl implements JobOfferService {
     }
 
     @Override
-    public List<JobOffer> filterBySalary(SalaryDto salaryDto){
-        List<JobOffer> allOffers = findAll();
-        List<JobOffer> offersFilteredBySalary = new ArrayList<>();
-
-        for(JobOffer jobOffer: allOffers){
-            if((jobOffer.getSalaryRange().getMinSalary() >= salaryDto.getMinSalary()) && (jobOffer.getSalaryRange().getMaxSalary() <= salaryDto.getMaxSalary())){
-                offersFilteredBySalary.add(jobOffer);
-            }
+    public List<JobOffer> filterBySalary(SalaryDto salaryDto) {
+        Double minSalary;
+        if (salaryDto.getMinSalary() == null) {
+            minSalary = Double.MIN_VALUE;
+        } else {
+            minSalary = salaryDto.getMinSalary();
         }
-        return offersFilteredBySalary;
+        Double maxSalary;
+        if (salaryDto.getMaxSalary() == null) {
+            maxSalary = Double.MAX_VALUE;
+        } else {
+            maxSalary = salaryDto.getMaxSalary();
+        }
+        return jobOfferRepository.findByMinSalaryGreaterThanEqualAndMaxSalaryLessThanEqual(minSalary, maxSalary).stream()
+                .map(e -> JobOffer.from(e))
+                .collect(Collectors.toList());
     }
+
+    //
+//    @Override
+//    public List<JobOffer> filterBySalary(SalaryDto salaryDto) {
+//        List<JobOffer> allOffers = findAll();
+//        List<JobOffer> offersFilteredBySalary = new ArrayList<>();
+//        Double minSalary;
+//        if (salaryDto.getMinSalary() == null) {
+//            minSalary = Double.MIN_VALUE;
+//        } else {
+//            minSalary = salaryDto.getMinSalary();
+//        }
+//        Double maxSalary;
+//        if (salaryDto.getMaxSalary() == null) {
+//            maxSalary = Double.MAX_VALUE;
+//        } else {
+//            maxSalary = salaryDto.getMaxSalary();
+//        }
+////         rozwiązanie bez wykorzystania funkcjonalności springa
+//        for (JobOffer jobOffer : allOffers) {
+//            if ((jobOffer.getMinSalary() >= minSalary) && (jobOffer.getMaxSalary() <= maxSalary)) {
+//                offersFilteredBySalary.add(jobOffer);
+//            }
+//        }
+//        return offersFilteredBySalary;
+//    }
 
     // tutaj można dodać filtrację ++
     // co filtrować? - chyba najłatwiej liste ofert którą już mam pobraną ++

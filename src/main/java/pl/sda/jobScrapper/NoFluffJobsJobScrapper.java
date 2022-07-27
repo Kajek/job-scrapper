@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import pl.sda.jobOffer.JobOffer;
+import pl.sda.jobOffer.JobOfferEntity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,10 +35,10 @@ public class NoFluffJobsJobScrapper implements JobScrapper {
                     String salary = jobOffer.getElementsByAttributeValue("data-cy", "salary ranges on the job offer listing").html().toString().replaceAll("&nbsp;","").trim();
                     String link = jobOffer.attr("href");
 
+                    Double minSalary = getMinSalary(salaryList(salary));
+                    Double maxSalary = getMaxSalary(salaryList(salary));
 
-                    JobOffer.SalaryRange salaryRange = populateSalaryRange(salaryList(salary));
-
-                    offers.add(new JobOffer(title, company, location, salaryRange, link));
+                    offers.add(new JobOffer(title, company, location, minSalary, maxSalary, link));
                 }
                 thereIsNextPage = checkIfNextPageExists(document);
             } catch (IOException e) {
@@ -71,21 +72,24 @@ public class NoFluffJobsJobScrapper implements JobScrapper {
                 result.add(m.group());
             }
         }
-        return result.stream().map(e-> Double.valueOf(e)).collect(Collectors.toList());
-    }
-
-    private JobOffer.SalaryRange populateSalaryRange(List<Double> salaryList){
-        JobOffer.SalaryRange salaryRange = new JobOffer.SalaryRange();
-        if(salaryList.isEmpty()){
-            salaryRange = new JobOffer.SalaryRange(0);
-        }else if(salaryList.size() == 1){
-            salaryRange = new JobOffer.SalaryRange(salaryList.get(0));
-        }else if(salaryList.size() == 2){
-            salaryRange = new JobOffer.SalaryRange(salaryList.get(0), salaryList.get(1));
+        List<Double> resultInDouble = result.stream().map(e -> Double.valueOf(e)).collect(Collectors.toList());
+        if( resultInDouble == null || resultInDouble.isEmpty()){
+            resultInDouble.add(0,0.0);
+            resultInDouble.add(1,0.0);
         }
-        return salaryRange;
-
+        return resultInDouble;
     }
 
-    // metoda przerabiająca salary na [] int
+    private Double getMinSalary(List<Double> salaryList){
+        if(salaryList.isEmpty()){
+            salaryList.add(0,0.0);
+        }
+        return  salaryList.get(0);
+    }
+    private Double getMaxSalary(List<Double> salaryList){
+        if(salaryList.size() == 1){
+            salaryList.add(1,0.0);
+        }
+        return  salaryList.get(1);
+    }
 }

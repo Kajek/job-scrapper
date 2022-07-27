@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Getting Started: Serving Web Content</title>
+  <title>Location</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -9,17 +10,40 @@
 <h1>Filtering is Fun!</h1>
 
 
-<div th:each="offer: ${offers}">
-  <h4 th:text="${offer.title}" ></h4>
-  <h4 th:text="${offer.company}" ></h4>
-  <h4 th:text="${offer.location}" ></h4>
-  <h4 th:text="${offer.minSalary}" ></h4>
-  <h4 th:text="${offer.maxSalary}" ></h4>
-  <h4> <a th:href="@{${offer.link}}" >Link do ogłoszenia</a> </h4>
+<table class="table is-striped is-hoverable" >
+  <thead>
+  <tr>
+    <th>Job Title</th>
+    <th>Company</th>
+    <th>Location</th>
+    <th>Minumum Salary</th>
+    <th>Maximum Salary</th>
+    <th>Link</th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr th:each="offer: ${offers}">
+    <td th:text="${offer.title}"></td>
+    <td th:text="${offer.company}"></td>
+    <td th:text="${offer.location}"></td>
+    <td th:text="${offer.minSalary}"></td>
+    <td th:text="${offer.maxSalary}"></td>
+    <td> <a th:href="@{${offer.link}}" >Link do ogłoszenia</a> </td>
+  </tr>
+  </tfoot>
+</table>
+
+<!--<div th:each="offer: ${offers}">-->
+<!--  <h4 th:text="${offer.title}" ></h4>-->
+<!--  <h4 th:text="${offer.company}" ></h4>-->
+<!--  <h4 th:text="${offer.location}" ></h4>-->
+<!--  <h4 th:text="${offer.minSalary}" ></h4>-->
+<!--  <h4 th:text="${offer.maxSalary}" ></h4>-->
+<!--  <h4> <a th:href="@{${offer.link}}" >Link do ogłoszenia</a> </h4>-->
 
 
-  <h3>=============================</h3>
-</div>
+<!--  <h3>=============================</h3>-->
+<!--</div>-->
 
 </body>
 </html>

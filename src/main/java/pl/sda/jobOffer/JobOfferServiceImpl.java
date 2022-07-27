@@ -50,7 +50,7 @@ public class JobOfferServiceImpl implements JobOfferService {
         List<JobOffer> allOffers = findAll();
         List<JobOffer> offersFilteredByLocation = new ArrayList<>();
         for (JobOffer jobOffer: allOffers){
-            if(jobOffer.getLocation().toLowerCase().startsWith(locationDto.getLocation().toLowerCase())){ //to do zmiany będzie bo czasem jest waszawa pol cos tam cos tam/ pewnie na coinains czy cos takiego
+            if(jobOffer.getLocation().toLowerCase().startsWith(locationDto.getLocation().toLowerCase())){
                 offersFilteredByLocation.add(jobOffer);
             }
         }
@@ -76,7 +76,7 @@ public class JobOfferServiceImpl implements JobOfferService {
                 .collect(Collectors.toList());
     }
 
-    //
+//    rozwiązanie bez wykorzystania funkcjonalności springa
 //    @Override
 //    public List<JobOffer> filterBySalary(SalaryDto salaryDto) {
 //        List<JobOffer> allOffers = findAll();
@@ -93,7 +93,6 @@ public class JobOfferServiceImpl implements JobOfferService {
 //        } else {
 //            maxSalary = salaryDto.getMaxSalary();
 //        }
-////         rozwiązanie bez wykorzystania funkcjonalności springa
 //        for (JobOffer jobOffer : allOffers) {
 //            if ((jobOffer.getMinSalary() >= minSalary) && (jobOffer.getMaxSalary() <= maxSalary)) {
 //                offersFilteredBySalary.add(jobOffer);

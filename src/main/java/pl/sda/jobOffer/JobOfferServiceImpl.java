@@ -43,66 +43,103 @@ public class JobOfferServiceImpl implements JobOfferService {
     }
 
     @Override
-    public List<JobOffer> filterByLocation(LocationDto locationDto) {
-//        return jobOfferRepository.findByLocation(locationDto.getLocation()).stream()
-//                .map(e -> JobOffer.from(e))
-//                .collect(Collectors.toList()); //problem z uwzględnieniem wielkości liter i końcówek PL
-        List<JobOffer> allOffers = findAll();
-        List<JobOffer> offersFilteredByLocation = new ArrayList<>();
-        for (JobOffer jobOffer: allOffers){
-            if(jobOffer.getLocation().toLowerCase().startsWith(locationDto.getLocation().toLowerCase())){
-                offersFilteredByLocation.add(jobOffer);
-            }
-        }
-        return offersFilteredByLocation;
-    }
-
-    @Override
-    public List<JobOffer> filterBySalary(SalaryDto salaryDto) {
+    public List<JobOffer> filterByParams(FilterParamsDto filterParamsDto) {
         Double minSalary;
-        if (salaryDto.getMinSalary() == null) {
+        if (filterParamsDto.getMinSalary() == null) {
             minSalary = Double.MIN_VALUE;
         } else {
-            minSalary = salaryDto.getMinSalary();
+            minSalary = filterParamsDto.getMinSalary();
         }
         Double maxSalary;
-        if (salaryDto.getMaxSalary() == null) {
+        if (filterParamsDto.getMaxSalary() == null) {
             maxSalary = Double.MAX_VALUE;
         } else {
-            maxSalary = salaryDto.getMaxSalary();
+            maxSalary = filterParamsDto.getMaxSalary();
         }
-        return jobOfferRepository.findByMinSalaryGreaterThanEqualAndMaxSalaryLessThanEqual(minSalary, maxSalary).stream()
+        List<JobOffer> allOffersFilteredBySalary = jobOfferRepository
+                .findByMinSalaryGreaterThanEqualAndMaxSalaryLessThanEqual(minSalary, maxSalary)
+                .stream()
                 .map(e -> JobOffer.from(e))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());;
+        List<JobOffer> offersFilteredByParams = new ArrayList<>();
+
+        for (JobOffer jobOffer : allOffersFilteredBySalary) {
+            if (jobOffer.getLocation().toLowerCase().contains(filterParamsDto.getLocation().toLowerCase())) {
+                offersFilteredByParams.add(jobOffer);
+            }
+        }
+        return offersFilteredByParams;
     }
 
-//    rozwiązanie bez wykorzystania funkcjonalności springa
+
+}
+
+//
 //    @Override
-//    public List<JobOffer> filterBySalary(SalaryDto salaryDto) {
+//    public List<JobOffer> filterByParams(FilterParamsDto filterParamsDto) {
 //        List<JobOffer> allOffers = findAll();
-//        List<JobOffer> offersFilteredBySalary = new ArrayList<>();
+//        List<JobOffer> offersFilteredByParams = new ArrayList<>();
 //        Double minSalary;
-//        if (salaryDto.getMinSalary() == null) {
+//        if (filterParamsDto.getMinSalary() == null) {
 //            minSalary = Double.MIN_VALUE;
 //        } else {
-//            minSalary = salaryDto.getMinSalary();
+//            minSalary = filterParamsDto.getMinSalary();
 //        }
 //        Double maxSalary;
-//        if (salaryDto.getMaxSalary() == null) {
+//        if (filterParamsDto.getMaxSalary() == null) {
 //            maxSalary = Double.MAX_VALUE;
 //        } else {
-//            maxSalary = salaryDto.getMaxSalary();
+//            maxSalary = filterParamsDto.getMaxSalary();
 //        }
 //        for (JobOffer jobOffer : allOffers) {
-//            if ((jobOffer.getMinSalary() >= minSalary) && (jobOffer.getMaxSalary() <= maxSalary)) {
-//                offersFilteredBySalary.add(jobOffer);
+//            if (
+//                    jobOffer.getLocation().toLowerCase().contains(filterParamsDto.getLocation().toLowerCase())) {
+//                offersFilteredByParams.add(jobOffer);
 //            }
 //        }
-//        return offersFilteredBySalary;
+//        return offersFilteredByParams;
 //    }
 
-    // tutaj można dodać filtrację ++
-    // co filtrować? - chyba najłatwiej liste ofert którą już mam pobraną ++
-    // jak filtorwać - podając kryterium? np dla lokacji - nazwa miasta albo zdalna - zrobić dto? ++
-    // filtrowanie przez salary chyba muszę rozbić Dto.salary na min i max/  z modelu tez jakoś to wyciągać - .split(" ") na salary?.ifContains("-").usunąć PLN przy wyciągnaiu
-}
+
+
+
+
+
+
+
+
+
+//
+//    @Override
+//    public List<JobOffer> filterByLocation(FilterParamsDto filterParamsDto) {
+////        return jobOfferRepository.findByLocation(locationDto.getLocation()).stream()
+////                .map(e -> JobOffer.from(e))
+////                .collect(Collectors.toList()); //problem z uwzględnieniem wielkości liter i końcówek PL
+//        List<JobOffer> allOffers = findAll();
+//        List<JobOffer> offersFilteredByLocation = new ArrayList<>();
+//        for (JobOffer jobOffer: allOffers){
+//            if(jobOffer.getLocation().toLowerCase().startsWith(filterParamsDto.getLocation().toLowerCase())){
+//                offersFilteredByLocation.add(jobOffer);
+//            }
+//        }
+//        return offersFilteredByLocation;
+//    }
+//
+//    @Override
+//    public List<JobOffer> filterBySalary(FilterParamsDto filterParamsDto) {
+//        Double minSalary;
+//        if (filterParamsDto.getMinSalary() == null) {
+//            minSalary = Double.MIN_VALUE;
+//        } else {
+//            minSalary = filterParamsDto.getMinSalary();
+//        }
+//        Double maxSalary;
+//        if (filterParamsDto.getMaxSalary() == null) {
+//            maxSalary = Double.MAX_VALUE;
+//        } else {
+//            maxSalary = filterParamsDto.getMaxSalary();
+//        }
+//        return jobOfferRepository.findByMinSalaryGreaterThanEqualAndMaxSalaryLessThanEqual(minSalary, maxSalary).stream()
+//                .map(e -> JobOffer.from(e))
+//                .collect(Collectors.toList());
+//    }

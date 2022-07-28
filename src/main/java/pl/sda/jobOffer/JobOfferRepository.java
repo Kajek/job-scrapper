@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface JobOfferRepository extends JpaRepository<JobOfferEntity, Long> {
 
-//    List<JobOfferEntity> findByLocation(String location);
+//    List<JobOfferEntity> findByLocation(String location); - nie działa dla tych danych co pobieram
+
     List<JobOfferEntity> findByMinSalaryGreaterThanEqualAndMaxSalaryLessThanEqual(Double minSalary, Double maxSalary);
 }

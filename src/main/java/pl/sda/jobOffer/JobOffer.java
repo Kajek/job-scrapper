@@ -20,8 +20,6 @@ public class JobOffer {
     private String title;
     private String company;
     private String location;
-//    @Embedded
-//    private SalaryRange salaryRange;
     private double minSalary;
     private double maxSalary;
     private String link;
@@ -41,7 +39,7 @@ public class JobOffer {
         this.location = location;
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
-        this.link = "https://nofluffjobs.com" + link;
+        this.link = link;
     }
 
     public static JobOffer from(JobOfferEntity entity){
@@ -53,33 +51,6 @@ public class JobOffer {
                 entity.getMaxSalary(),
                 entity.getLink());
     }
-
-
-//    @Data
-//    @Setter
-//    @Embeddable
-//    public static class SalaryRange {
-//        private double minSalary;
-//        private double maxSalary;
-//
-//        public SalaryRange(double minSalary, double maxSalary) {
-//            this.minSalary = minSalary;
-//            this.maxSalary = maxSalary;
-//        }
-//        public SalaryRange(double minSalary) {
-//            this.minSalary = minSalary;
-//        }
-//        public SalaryRange() {
-//        }
-//
-//        @Override
-//        public String toString() {
-//            return
-//                    "minimalne wynagrodzenie:" + minSalary  + "\r\n" +
-//                    "  maksymalne wynagrodzenie " + maxSalary ;
-//        }
-//    }
-
 }
 
 

@@ -31,7 +31,7 @@ public class JobOfferEntity {
         this.location = location;
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
-        this.link = "https://nofluffjobs.com" + link;
+        this.link = link;
     }
 
     public Long getId() {

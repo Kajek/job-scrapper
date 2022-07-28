@@ -33,7 +33,7 @@ public class NoFluffJobsJobScrapper implements JobScrapper {
                         location = "Zdalna";
                     }
                     String salary = jobOffer.getElementsByAttributeValue("data-cy", "salary ranges on the job offer listing").html().toString().replaceAll("&nbsp;","").trim();
-                    String link = jobOffer.attr("href");
+                    String link = "https://nofluffjobs.com" + jobOffer.attr("href");
 
                     Double minSalary = getMinSalary(salaryList(salary));
                     Double maxSalary = getMaxSalary(salaryList(salary));

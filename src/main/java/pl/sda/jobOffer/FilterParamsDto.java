@@ -7,9 +7,10 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SalaryDto {
+public class FilterParamsDto {
 
-    private Double minSalary;
-    private Double maxSalary;
+    public String location;
+    Double  minSalary;
+    Double  maxSalary;
 
 }

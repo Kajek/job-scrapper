@@ -1,10 +1,12 @@
 package pl.sda.jobOffer;
 
 
+import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import pl.sda.jobScrapper.JobScrapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -64,6 +66,10 @@ public class JobOfferServiceImpl implements JobOfferService {
         List<JobOffer> offersFilteredByParams = new ArrayList<>();
 
         for (JobOffer jobOffer : allOffersFilteredBySalary) {
+            // dodane warunkowanie w ramach prób usunięcia nullPTR przy zmianie strony z wynikami filtrowania - i tak źle działa do nadpisuje przy zmianie strony
+//            if(filterParamsDto.getLocation() == null){
+//                filterParamsDto.setLocation("");
+//            }
             if (jobOffer.getLocation().toLowerCase().contains(filterParamsDto.getLocation().toLowerCase())) {
                 offersFilteredByParams.add(jobOffer);
             }
@@ -71,7 +77,25 @@ public class JobOfferServiceImpl implements JobOfferService {
         return offersFilteredByParams;
     }
 
+    @Override
+    public Page<JobOffer> findPaginated(Pageable pageable, List<JobOffer> jobOffers) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<JobOffer> list;
 
+        if (jobOffers.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, jobOffers.size());
+            list = jobOffers.subList(startItem, toIndex);
+        }
+
+        Page<JobOffer> jobOfferPage
+                = new PageImpl<JobOffer>(list, PageRequest.of(currentPage, pageSize), jobOffers.size());
+
+        return jobOfferPage;
+    }
 }
 
 //

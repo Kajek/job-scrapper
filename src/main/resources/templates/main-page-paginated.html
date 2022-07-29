@@ -11,13 +11,13 @@
 
 <h1>Welcome to Junior Java Developer Job Offer Scraper</h1>
 
-<form method="get" th:action="@{/}">
+<form method="get" th:action="@{/listOffers}">
 
     <button class="btn btn-primary" type="submit">All offers</button>
 
 </form>
 
-<form method="get" th:action="@{/filtered}" th:object="${filterParamsDto}">
+<form method="get" th:action="@{/listOffers}" th:object="${filterParamsDto}">
 
     <label>
         Name of the city to filter by (or zdalna):
@@ -48,7 +48,9 @@
     </tr>
     </thead>
     <tfoot>
-    <tr th:each="offer: ${offers}">
+    <tr th:each="offer, iStat : ${offers.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
         <td th:text="${offer.title}"></td>
         <td th:text="${offer.company}"></td>
         <td th:text="${offer.location}"></td>
@@ -59,6 +61,12 @@
     </tfoot>
 </table>
 
+<div th:if="${offers.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/listOffers(size=${offers.size}, page=${pageNumber})}"
+       th:text=${pageNumber}
+       th:class="${pageNumber==offers.number + 1} ? active"></a>
+</div>
 
 </body>
 </html>

@@ -6,7 +6,7 @@ Scrapping job offers for Junior Java Developer position from most popular servic
 
 ## Demo
 
-[DEMO]()
+[DEMO](https://simple-job-scraper.herokuapp.com/)
 
 ## Tech stack
 
@@ -25,9 +25,11 @@ Scrapping job offers for Junior Java Developer position from most popular servic
 - ☑️ Switch from MVC to Domain focused project structure
 - ☑️ Filtering and saving job offers in H2 database 
 - ☑️ Simple README
-- ☑️ Add CSS styling
-- ⬜ Add pagination
-- ⬜ Deployment to heroku
+- ⬜️ Add CSS styling
+- ⬜️ Add tests
+- ☑️ Add pagination
+- ⬜️ Add pagination to filtering
+- ☑️ Deployment to heroku
 - ⬜ Switch from H2 to Postgres or MySQL
 - ⬜ Add scraping from JustJoinIt
 

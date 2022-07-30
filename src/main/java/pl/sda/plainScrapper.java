@@ -22,7 +22,7 @@ public class plainScrapper {
 
         for (Element jobOffer: document.getElementsByClass("jss221.jss2746")){
 
-            String title = jobOffer.getElementsByClass("jss233").text();
+            String title = jobOffer.getElementsByClass("jss235").text();
 //            String company = jobOffer.getElementsByClass("d-block").text();
 //            String location = jobOffer.getElementsByClass("mr-1").text();
 //            String link = jobOffer.attr("href");

@@ -11,7 +11,7 @@
 
 <h1>Welcome to Junior Java Developer Job Offer Scraper</h1>
 
-<form method="get" th:action="@{/listOffers}">
+<form method="get" th:action="@{/}">
 
     <button class="btn btn-primary" type="submit">All offers</button>
 
@@ -63,10 +63,17 @@
 
 <div th:if="${offers.totalPages > 0}" class="pagination"
      th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/listOffers(size=${offers.size}, page=${pageNumber})}"
+    <a th:href="@{/listOffers(location=${filterParamsDto.location} ,minSalary=${filterParamsDto.minSalary} , maxSalary=${filterParamsDto.maxSalary},size=${offers.size}, page=${pageNumber})}"
        th:text=${pageNumber}
        th:class="${pageNumber==offers.number + 1} ? active"></a>
 </div>
 
 </body>
 </html>
+
+
+<!--<a th:href="@{/listOffers(locationInfo=${locInfo},size=${offers.size}, page=${pageNumber})}"-->
+<!--   th:text=${locInfo}-->
+<!--   th:class="${locInfo==filterParamsDto.locationInfo} ? active"-->
+<!--   th:text=${pageNumber}-->
+<!--   th:class="${pageNumber==offers.number + 1} ? active"></a>-->

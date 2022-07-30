@@ -28,7 +28,6 @@ Scrapping job offers for Junior Java Developer position from most popular servic
 - ⬜️ Add CSS styling
 - ⬜️ Add tests
 - ☑️ Add pagination
-- ⬜️ Add pagination to filtering
 - ☑️ Deployment to heroku
 - ⬜ Switch from H2 to Postgres or MySQL
 - ⬜ Add scraping from JustJoinIt

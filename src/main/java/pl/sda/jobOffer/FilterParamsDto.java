@@ -13,4 +13,7 @@ public class FilterParamsDto {
     Double  minSalary;
     Double  maxSalary;
 
+    public String locationInfo(){
+        return "location=" + location + "minSalary=" + minSalary.toString() + "maxSalary="+ maxSalary.toString();
+    }
 }

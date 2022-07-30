@@ -66,10 +66,6 @@ public class JobOfferServiceImpl implements JobOfferService {
         List<JobOffer> offersFilteredByParams = new ArrayList<>();
 
         for (JobOffer jobOffer : allOffersFilteredBySalary) {
-            // dodane warunkowanie w ramach prób usunięcia nullPTR przy zmianie strony z wynikami filtrowania - i tak źle działa do nadpisuje przy zmianie strony
-//            if(filterParamsDto.getLocation() == null){
-//                filterParamsDto.setLocation("");
-//            }
             if (jobOffer.getLocation().toLowerCase().contains(filterParamsDto.getLocation().toLowerCase())) {
                 offersFilteredByParams.add(jobOffer);
             }
@@ -122,48 +118,4 @@ public class JobOfferServiceImpl implements JobOfferService {
 //            }
 //        }
 //        return offersFilteredByParams;
-//    }
-
-
-
-
-
-
-
-
-
-
-//
-//    @Override
-//    public List<JobOffer> filterByLocation(FilterParamsDto filterParamsDto) {
-////        return jobOfferRepository.findByLocation(locationDto.getLocation()).stream()
-////                .map(e -> JobOffer.from(e))
-////                .collect(Collectors.toList()); //problem z uwzględnieniem wielkości liter i końcówek PL
-//        List<JobOffer> allOffers = findAll();
-//        List<JobOffer> offersFilteredByLocation = new ArrayList<>();
-//        for (JobOffer jobOffer: allOffers){
-//            if(jobOffer.getLocation().toLowerCase().startsWith(filterParamsDto.getLocation().toLowerCase())){
-//                offersFilteredByLocation.add(jobOffer);
-//            }
-//        }
-//        return offersFilteredByLocation;
-//    }
-//
-//    @Override
-//    public List<JobOffer> filterBySalary(FilterParamsDto filterParamsDto) {
-//        Double minSalary;
-//        if (filterParamsDto.getMinSalary() == null) {
-//            minSalary = Double.MIN_VALUE;
-//        } else {
-//            minSalary = filterParamsDto.getMinSalary();
-//        }
-//        Double maxSalary;
-//        if (filterParamsDto.getMaxSalary() == null) {
-//            maxSalary = Double.MAX_VALUE;
-//        } else {
-//            maxSalary = filterParamsDto.getMaxSalary();
-//        }
-//        return jobOfferRepository.findByMinSalaryGreaterThanEqualAndMaxSalaryLessThanEqual(minSalary, maxSalary).stream()
-//                .map(e -> JobOffer.from(e))
-//                .collect(Collectors.toList());
 //    }

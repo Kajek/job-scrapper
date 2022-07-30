@@ -34,20 +34,6 @@ public class ScrapperController {
         return "main-page";
     }
 
-    @GetMapping("/filtered")
-    public String filterJobOffers(@ModelAttribute("filterParamsDto") FilterParamsDto filterParamsDto, ModelMap modelMap) {
-        List<JobOffer> offers = jobOfferService.filterByParams(filterParamsDto);
-        modelMap.addAttribute("offers", offers);
-        return "main-page-filtered";
-    }
-
-
-    @ModelAttribute("filterParamsDto")
-    public void filterParamsDto(Model model) {
-        model.addAttribute(new FilterParamsDto());
-    }
-
-// Pagination work in progress
     @GetMapping("/listOffers")
     public String listJobOffers(
             ModelMap modelMap,
@@ -55,9 +41,8 @@ public class ScrapperController {
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(10);
 
-//        List<JobOffer> offersList = jobOfferService.findAll();
         List<JobOffer> offersList = jobOfferService.filterByParams(filterParamsDto);;
         Page<JobOffer> offers = jobOfferService.findPaginated(PageRequest.of(currentPage - 1, pageSize), offersList);
 
@@ -72,6 +57,21 @@ public class ScrapperController {
         }
 
         return "main-page-paginated";
+    }
+
+
+
+    @GetMapping("/filtered")
+    public String filterJobOffers(@ModelAttribute("filterParamsDto") FilterParamsDto filterParamsDto, ModelMap modelMap) {
+        List<JobOffer> offers = jobOfferService.filterByParams(filterParamsDto);
+        modelMap.addAttribute("offers", offers);
+        return "main-page-filtered";
+    }
+
+
+    @ModelAttribute("filterParamsDto")
+    public void filterParamsDto(Model model) {
+        model.addAttribute(new FilterParamsDto());
     }
 
 }

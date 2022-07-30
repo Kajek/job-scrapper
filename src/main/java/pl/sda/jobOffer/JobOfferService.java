@@ -10,6 +10,4 @@ public interface JobOfferService {
     List<JobOffer> findAll();
     List<JobOffer> filterByParams(FilterParamsDto filterParamsDto);
     Page<JobOffer> findPaginated(Pageable pageable, List<JobOffer> jobOffers);
-
-//    List<JobOffer> findAll(int pageNo, int pageSize, String sortBy);
 }

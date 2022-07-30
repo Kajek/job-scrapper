@@ -43,8 +43,9 @@ public class ScrapperController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(10);
 
-        List<JobOffer> offersList = jobOfferService.filterByParams(filterParamsDto);;
+        List<JobOffer> offersList = jobOfferService.filterByParams(filterParamsDto);
         Page<JobOffer> offers = jobOfferService.findPaginated(PageRequest.of(currentPage - 1, pageSize), offersList);
+//        Page<JobOffer> offers = jobOfferService.filterByPararara(filterParamsDto, PageRequest.of(currentPage - 1, pageSize));
 
         modelMap.addAttribute("offers", offers);
 

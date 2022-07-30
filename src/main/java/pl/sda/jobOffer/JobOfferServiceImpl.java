@@ -1,10 +1,14 @@
 package pl.sda.jobOffer;
 
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import pl.sda.jobScrapper.JobScrapper;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,15 +41,20 @@ public class JobOfferServiceImpl implements JobOfferService {
 
     @Override
     public List<JobOffer> findAll() {
-        return jobOfferRepository.
-                findAll().
-                stream().
-                map(e -> JobOffer.from(e))
+        return jobOfferRepository
+                .findAll()
+                .stream()
+                .map(e -> JobOffer.from(e))
                 .collect(Collectors.toList());
     }
 
+
+
     @Override
     public List<JobOffer> filterByParams(FilterParamsDto filterParamsDto) {
+
+        QJobOfferEntity qJobOfferEntity = QJobOfferEntity.jobOfferEntity;
+
         Double minSalary;
         if (filterParamsDto.getMinSalary() == null) {
             minSalary = Double.MIN_VALUE;
@@ -58,19 +67,22 @@ public class JobOfferServiceImpl implements JobOfferService {
         } else {
             maxSalary = filterParamsDto.getMaxSalary();
         }
-        List<JobOffer> allOffersFilteredBySalary = jobOfferRepository
-                .findByMinSalaryGreaterThanEqualAndMaxSalaryLessThanEqual(minSalary, maxSalary)
+
+        BooleanExpression offersExpression = qJobOfferEntity.location.containsIgnoreCase(filterParamsDto.getLocation())
+                                                            .and(qJobOfferEntity.minSalary.goe(minSalary))
+                                                            .and(qJobOfferEntity.maxSalary.loe(maxSalary));
+
+        Iterable<JobOfferEntity> offers = jobOfferRepository.findAll(offersExpression);
+
+        List<JobOfferEntity> offersFilteredByParams = new ArrayList<>();
+        for( JobOfferEntity joe: offers){
+            offersFilteredByParams.add(joe);
+        }
+
+        return offersFilteredByParams
                 .stream()
                 .map(e -> JobOffer.from(e))
-                .collect(Collectors.toList());;
-        List<JobOffer> offersFilteredByParams = new ArrayList<>();
-
-        for (JobOffer jobOffer : allOffersFilteredBySalary) {
-            if (jobOffer.getLocation().toLowerCase().contains(filterParamsDto.getLocation().toLowerCase())) {
-                offersFilteredByParams.add(jobOffer);
-            }
-        }
-        return offersFilteredByParams;
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -92,30 +104,38 @@ public class JobOfferServiceImpl implements JobOfferService {
 
         return jobOfferPage;
     }
+
+
+
+
+
+    // paginacja z wykorzystaniem interfejsu Querydsl
+    @Override
+    public Page<JobOffer> filterByPararara(FilterParamsDto filterParamsDto, Pageable pageable) {
+
+        QJobOfferEntity qJobOfferEntity = QJobOfferEntity.jobOfferEntity;
+
+        Double minSalary;
+        if (filterParamsDto.getMinSalary() == null) {
+            minSalary = Double.MIN_VALUE;
+        } else {
+            minSalary = filterParamsDto.getMinSalary();
+        }
+        Double maxSalary;
+        if (filterParamsDto.getMaxSalary() == null) {
+            maxSalary = Double.MAX_VALUE;
+        } else {
+            maxSalary = filterParamsDto.getMaxSalary();
+        }
+
+        BooleanExpression offersExpression = qJobOfferEntity.location.containsIgnoreCase(filterParamsDto.getLocation())
+                .and(qJobOfferEntity.minSalary.goe(minSalary))
+                .and(qJobOfferEntity.maxSalary.loe(maxSalary));
+
+        return jobOfferRepository.findAll(offersExpression, pageable).map(entity -> JobOffer.from(entity));
+
+
+    }
 }
 
-//
-//    @Override
-//    public List<JobOffer> filterByParams(FilterParamsDto filterParamsDto) {
-//        List<JobOffer> allOffers = findAll();
-//        List<JobOffer> offersFilteredByParams = new ArrayList<>();
-//        Double minSalary;
-//        if (filterParamsDto.getMinSalary() == null) {
-//            minSalary = Double.MIN_VALUE;
-//        } else {
-//            minSalary = filterParamsDto.getMinSalary();
-//        }
-//        Double maxSalary;
-//        if (filterParamsDto.getMaxSalary() == null) {
-//            maxSalary = Double.MAX_VALUE;
-//        } else {
-//            maxSalary = filterParamsDto.getMaxSalary();
-//        }
-//        for (JobOffer jobOffer : allOffers) {
-//            if (
-//                    jobOffer.getLocation().toLowerCase().contains(filterParamsDto.getLocation().toLowerCase())) {
-//                offersFilteredByParams.add(jobOffer);
-//            }
-//        }
-//        return offersFilteredByParams;
-//    }
+

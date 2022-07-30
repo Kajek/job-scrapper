@@ -18,20 +18,20 @@ public class plainScrapper {
     public static void main(String[] args) throws Exception {
 
 
-        Document document = Jsoup.connect("https://justjoin.it/all/java/junior").get();
+        Document document = Jsoup.connect("https://nofluffjobs.com/pl/java?criteria=seniority%3Djunior&page=1").get();
 
-        for (Element jobOffer: document.getElementsByClass("jss221.jss2746")){
+        for (Element jobOffer: document.getElementsByClass("posting-list-item")){
 
-            String title = jobOffer.getElementsByClass("jss235").text();
+//            String title = jobOffer.getElementsByClass("jss235").text();
 //            String company = jobOffer.getElementsByClass("d-block").text();
-//            String location = jobOffer.getElementsByClass("mr-1").text();
+            String location = jobOffer.getElementsByClass("mr-1").text();
 //            String link = jobOffer.attr("href");
 //            String salary = jobOffer.getElementsByAttributeValue("data-cy", "salary ranges on the job offer listing").html().toString().replaceAll("&nbsp;","").trim();
 
 //            List<String> result = null;
-            System.out.println(title);
+//            System.out.println(title);
 //            System.out.println(company);
-//            System.out.println(location);
+            System.out.println(location);
 //            System.out.println("https://nofluffjobs.com"+link);
 //            System.out.println(salary);
 //

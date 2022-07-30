@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Main page</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
 
 </form>
 
-<table class="table is-striped is-hoverable" >
+<table class="table is-striped is-hoverable">
     <thead>
     <tr>
         <th>Job Title</th>
@@ -56,24 +56,19 @@
         <td th:text="${offer.location}"></td>
         <td th:text="${offer.minSalary}"></td>
         <td th:text="${offer.maxSalary}"></td>
-        <td> <a th:href="@{${offer.link}}" >Link do ogłoszenia</a> </td>
+        <td><a th:href="@{${offer.link}}">Link do ogłoszenia</a></td>
     </tr>
     </tfoot>
 </table>
 
-<div th:if="${offers.totalPages > 0}" class="pagination"
-     th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/listOffers(location=${filterParamsDto.location} ,minSalary=${filterParamsDto.minSalary} , maxSalary=${filterParamsDto.maxSalary},size=${offers.size}, page=${pageNumber})}"
+<div th:style="'padding-left:10px;'"
+     th:if="${offers.totalPages > 0}">
+    <a th:style="'padding-left:10px;'"
+       th:each="pageNumber : ${pageNumbers}"
+       th:href="@{/listOffers(location=${filterParamsDto.location} ,minSalary=${filterParamsDto.minSalary} , maxSalary=${filterParamsDto.maxSalary},size=${offers.size}, page=${pageNumber})}"
        th:text=${pageNumber}
        th:class="${pageNumber==offers.number + 1} ? active"></a>
 </div>
 
 </body>
 </html>
-
-
-<!--<a th:href="@{/listOffers(locationInfo=${locInfo},size=${offers.size}, page=${pageNumber})}"-->
-<!--   th:text=${locInfo}-->
-<!--   th:class="${locInfo==filterParamsDto.locationInfo} ? active"-->
-<!--   th:text=${pageNumber}-->
-<!--   th:class="${pageNumber==offers.number + 1} ? active"></a>-->

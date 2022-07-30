@@ -12,6 +12,7 @@ Scrapping job offers for Junior Java Developer position from most popular servic
 
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Thymeleaf](https://www.thymeleaf.org/)
+- [Querydsl](http://querydsl.com/)
 - [Bulma](https://bulma.io/)
 
 ## Authors

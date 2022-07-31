@@ -109,6 +109,13 @@ public class JobOfferServiceImpl implements JobOfferService {
 
 
 
+
+
+
+
+
+
+
     // paginacja z wykorzystaniem interfejsu Querydsl
     @Override
     public Page<JobOffer> filterByPararara(FilterParamsDto filterParamsDto, Pageable pageable) {

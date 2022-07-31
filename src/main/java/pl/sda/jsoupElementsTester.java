@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
-public class plainScrapper {
+public class jsoupElementsTester {
 
     public static void main(String[] args) throws Exception {
 

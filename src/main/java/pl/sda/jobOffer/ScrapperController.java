@@ -77,7 +77,5 @@ public class ScrapperController {
 
 }
 
-    // TODO
 
-    // dodać inny serwis? justJoinit?
 

@@ -61,7 +61,14 @@ public class ScrapperController {
     }
 
 
+    @ModelAttribute("filterParamsDto")
+    public void filterParamsDto(Model model) {
+        model.addAttribute(new FilterParamsDto());
+    }
 
+
+
+    // do testowania widoków
     @GetMapping("/filtered")
     public String filterJobOffers(@ModelAttribute("filterParamsDto") FilterParamsDto filterParamsDto, ModelMap modelMap) {
         List<JobOffer> offers = jobOfferService.filterByParams(filterParamsDto);
@@ -70,10 +77,6 @@ public class ScrapperController {
     }
 
 
-    @ModelAttribute("filterParamsDto")
-    public void filterParamsDto(Model model) {
-        model.addAttribute(new FilterParamsDto());
-    }
 
 }
 

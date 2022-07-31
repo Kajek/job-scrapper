@@ -4,39 +4,55 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Main page</title>
 </head>
 <body>
 
-<h1>Welcome to Junior Java Developer Job Offer Scraper</h1>
 
-<form method="get" th:action="@{/}">
-
-    <button class="btn btn-primary" type="submit">All offers</button>
-
-</form>
-
-<form method="get" th:action="@{/listOffers}" th:object="${filterParamsDto}">
-
-    <label>
-        Name of the city to filter by (or zdalna):
-        <input type="text" th:field="*{location}"/>
-    </label>
-    <label>
-        Min salary:
-        <input type="number" th:field="*{minSalary}"/>
-    </label>
-    <label>
-        Max Salary:
-        <input type="number" th:field="*{maxSalary}"/>
-    </label>
-    <button class="btn btn-primary" type="submit">Get offers</button>
+<section class="hero is-small is-primary">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <p class="title">
+                Welcome to Junior Java Developer Job Offer Scraper
+            </p>
+        </div>
+    </div>
+</section>
 
 
-</form>
+<section class="section">
+    <form method="get" th:action="@{/}">
+        <div class="buttons is-centered">
+            <button class="button is-success is-rounded is-large" type="submit">All offers</button>
+        </div>
+    </form>
+</section>
 
-<table class="table is-striped is-hoverable" >
+<div class="container is-centered">
+    <div class="container has-text-centered">
+        <form method="get" th:action="@{/listOffers}" th:object="${filterParamsDto}">
+
+
+            <label>
+                <input class="input is-primary is-medium" type="text" placeholder="City name / zdalna" th:field="*{location}"/>
+            </label>
+
+            <label>
+                <input class="input is-primary is-medium" type="number" placeholder="Minimum salary" th:field="*{minSalary}"/>
+            </label>
+            <label>
+                <input class="input is-primary is-medium" type="number" placeholder="Maximum salary" th:field="*{maxSalary}"/>
+            </label>
+            <div>
+                <button class="button is-success is-rounded is-medium" type="submit">Get offers</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<table class="table is-striped is-hoverable is-fullwidth">
     <thead>
     <tr>
         <th>Job Title</th>
@@ -54,7 +70,7 @@
         <td th:text="${offer.location}"></td>
         <td th:text="${offer.minSalary}"></td>
         <td th:text="${offer.maxSalary}"></td>
-        <td> <a th:href="@{${offer.link}}" >Link do ogłoszenia</a> </td>
+        <td><a th:href="@{${offer.link}}">Link do ogłoszenia</a></td>
     </tr>
     </tfoot>
 </table>

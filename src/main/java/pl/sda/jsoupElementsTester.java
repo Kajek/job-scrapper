@@ -18,44 +18,35 @@ public class jsoupElementsTester {
     public static void main(String[] args) throws Exception {
 
 
-        Document document = Jsoup.connect("https://nofluffjobs.com/pl/java?criteria=seniority%3Djunior&page=1").get();
+        Document document = Jsoup.connect("https://bulldogjob.pl/companies/jobs/s/skills,Java/experienceLevel,junior").get();
+        int count = 0;
+        for (Element jobOffer: document.getElementsByClass("mb-2")){
+            count++;
+            String title = jobOffer.getElementsByClass("mb-3").text();
+            String company = jobOffer.getElementsByClass("my-2").text();
+            String location = jobOffer.getElementsByClass("rounded-t-lg").text(); //wyedytować > 1 element "więcej niż 1 lokacja"
+            String link = jobOffer.getElementsByClass("absolute").attr("href");
+            String salary = jobOffer.getElementsByClass("text-purple").text();
 
-        for (Element jobOffer: document.getElementsByClass("posting-list-item")){
-
-//            String title = jobOffer.getElementsByClass("jss235").text();
-//            String company = jobOffer.getElementsByClass("d-block").text();
-            String location = jobOffer.getElementsByClass("mr-1").text();
-//            String link = jobOffer.attr("href");
 //            String salary = jobOffer.getElementsByAttributeValue("data-cy", "salary ranges on the job offer listing").html().toString().replaceAll("&nbsp;","").trim();
 
-//            List<String> result = null;
-//            System.out.println(title);
-//            System.out.println(company);
+            System.out.println(count + "...");
+            System.out.println(title.substring(0, title.length()/2));
+            System.out.println(company.substring(0, company.length()/2));
             System.out.println(location);
-//            System.out.println("https://nofluffjobs.com"+link);
-//            System.out.println(salary);
-//
-//            Pattern p = Pattern.compile("\\d+");
-//            Matcher m = p.matcher(salary);
-//            if(m.find()) {
-////                System.out.println(m.group());
-//                result = new ArrayList<String>();
-//                result.add(m.group());
-//                while (m.find()){
-//                    result.add(m.group());
-//                }
-//            }
-//            System.out.println(result);
-
+            System.out.println(link);
+            System.out.println(salary.replaceAll("[^0-9.-]", "").replaceAll("\\s+",""));
 
             System.out.println("======================================================");
-        }}}
-//        for (Element jobOffer: document.getElementsByTag("nfj-search-results")){
-//            List<String> nextButtons = jobOffer.getElementsByClass("page-link").stream().map(e -> e.text()).collect(Collectors.toList());;
-//            System.out.println(nextButtons);
-//            if(nextButtons.contains("»")){
-//                System.out.println("nie dupa");
-//            }else{
-//                System.out.println("dupa");
-//            }
-//        }
+        }
+
+        for (Element pages: document.getElementsByClass("pagination-bar")){
+            List<Integer> nextButtons = pages.getElementsByClass("mx-1").stream().map(e -> e.text()).map(e -> Integer.parseInt(e)).collect(Collectors.toList());;
+            String page = pages.getElementsByClass("mx-1").text();
+
+            System.out.println(page);
+            System.out.println(nextButtons);
+        }
+
+    }
+}

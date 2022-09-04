@@ -3,6 +3,7 @@ package pl.sda;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.sda.jobOffer.JobOfferRepository;
+import pl.sda.jobScrapper.BulldogJobJobScrapper;
 import pl.sda.jobScrapper.JobScrapper;
 import pl.sda.jobScrapper.JustJoinItJobScrapper;
 import pl.sda.jobScrapper.NoFluffJobsJobScrapper;
@@ -19,7 +20,7 @@ public class SpringConfig {
 
     @Bean
     List<JobScrapper> jobScrappers(){
-        return List.of(new JustJoinItJobScrapper(), new NoFluffJobsJobScrapper());
+        return List.of(new JustJoinItJobScrapper(), new NoFluffJobsJobScrapper(),new BulldogJobJobScrapper());
     }
 
     @Bean

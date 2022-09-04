@@ -18,7 +18,7 @@ Scrapping job offers for Junior Java Developer position from most popular servic
 ## Authors
 
 - [@Kajek](https://www.github.com/Kajek)
-- [@Stanislawskis](https://www.github.com/Stanislawskis)
+
 
 ## Roadmap
 
@@ -30,7 +30,9 @@ Scrapping job offers for Junior Java Developer position from most popular servic
 - ⬜️ Add tests
 - ☑️ Add pagination
 - ☑️ Deployment to heroku
-- ⬜ Switch from H2 to Postgres or MySQL
+- ☑️ Add scraping from BulldogJob
+- ⬜ Add scraping from Pracuj.pl
+- ⬜ Switch from H2 to Postgres or MySQL if necessary
 - ⬜ Add scraping from JustJoinIt (dynamic site)
 
 

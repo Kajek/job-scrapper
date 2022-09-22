@@ -2,13 +2,10 @@ package pl.sda.jobOffer;
 
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Scheduled;
-import pl.sda.jobScrapper.JobScrapper;
+import pl.sda.jobScrapper.JobScraper;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,19 +15,19 @@ import java.util.stream.Collectors;
 
 public class JobOfferServiceImpl implements JobOfferService {
 
-    private final List<JobScrapper> jobScrappers;
+    private final List<JobScraper> jobScrapers;
     private final JobOfferRepository jobOfferRepository;
 
 
-    public JobOfferServiceImpl(List<JobScrapper> jobScrappers, JobOfferRepository jobOfferRepository) {
-        this.jobScrappers = jobScrappers;
+    public JobOfferServiceImpl(List<JobScraper> jobScrapers, JobOfferRepository jobOfferRepository) {
+        this.jobScrapers = jobScrapers;
         this.jobOfferRepository = jobOfferRepository;
     }
 
     @Scheduled(fixedDelay = 2, timeUnit = TimeUnit.HOURS)
     public void populateRepository() {
         jobOfferRepository.deleteAllInBatch();
-        List<JobOfferEntity> jobOffersEntityList = jobScrappers
+        List<JobOfferEntity> jobOffersEntityList = jobScrapers
                 .stream()
                 .flatMap(e -> e.getJobOffers().stream())
                 .map(e -> JobOfferEntity.from(e))

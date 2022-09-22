@@ -4,7 +4,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import pl.sda.jobOffer.JobOffer;
-import pl.sda.jobOffer.JobOfferEntity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
-public class NoFluffJobsJobScrapper implements JobScrapper {
+public class NoFluffJobsJobScraper implements JobScraper {
     @Override
     public List<JobOffer> getJobOffers() {
         List<JobOffer> offers = new ArrayList<>();

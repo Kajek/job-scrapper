@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class BulldogJobJobScrapper implements JobScrapper{
+public class BulldogJobJobScraper implements JobScraper {
     @Override
     public List<JobOffer> getJobOffers() {
         List<JobOffer> offers = new ArrayList<>();

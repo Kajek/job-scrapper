@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-public class ScrapperController {
+public class ScraperController {
 
     private final JobOfferService jobOfferService;
 
-    public ScrapperController(JobOfferService jobOfferService) {
+    public ScraperController(JobOfferService jobOfferService) {
         this.jobOfferService = jobOfferService;
     }
 
@@ -64,16 +64,6 @@ public class ScrapperController {
     @ModelAttribute("filterParamsDto")
     public void filterParamsDto(Model model) {
         model.addAttribute(new FilterParamsDto());
-    }
-
-
-
-    // do testowania widoków
-    @GetMapping("/filtered")
-    public String filterJobOffers(@ModelAttribute("filterParamsDto") FilterParamsDto filterParamsDto, ModelMap modelMap) {
-        List<JobOffer> offers = jobOfferService.filterByParams(filterParamsDto);
-        modelMap.addAttribute("offers", offers);
-        return "main-page-filtered";
     }
 
 

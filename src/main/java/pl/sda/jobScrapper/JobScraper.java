@@ -5,7 +5,7 @@ import pl.sda.jobOffer.JobOfferEntity;
 
 import java.util.List;
 
-public interface JobScrapper {
+public interface JobScraper {
 
     List<JobOffer> getJobOffers();
 }

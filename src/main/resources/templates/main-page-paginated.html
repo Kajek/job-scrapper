@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<section class="hero is-small is-primary">
+<section class="hero is-small is-success">
     <div class="hero-body">
         <div class="container has-text-centered">
             <p class="title">
@@ -34,14 +34,17 @@
 
 
             <label>
-                <input class="input is-primary is-medium" type="text" placeholder="City name / zdalna" th:field="*{location}"/>
+                <input class="input is-primary is-medium" type="text" placeholder="City name / zdalna"
+                       th:field="*{location}"/>
             </label>
 
             <label>
-                <input class="input is-primary is-medium" type="number" placeholder="Minimum salary" th:field="*{minSalary}"/>
+                <input class="input is-primary is-medium" type="number" placeholder="Minimum salary"
+                       th:field="*{minSalary}"/>
             </label>
             <label>
-                <input class="input is-primary is-medium" type="number" placeholder="Maximum salary" th:field="*{maxSalary}"/>
+                <input class="input is-primary is-medium" type="number" placeholder="Maximum salary"
+                       th:field="*{maxSalary}"/>
             </label>
             <div>
                 <button class="button is-success is-rounded is-medium" type="submit">Get offers</button>
@@ -50,30 +53,36 @@
     </div>
 </div>
 
-<table class="table is-striped is-hoverable is-fullwidth">
-    <thead>
-    <tr>
-        <th>Job Title</th>
-        <th>Company</th>
-        <th>Location</th>
-        <th>Minimum Salary</th>
-        <th>Maximum Salary</th>
-        <th>Link</th>
-    </tr>
-    </thead>
-    <tfoot>
-    <tr th:each="offer, iStat : ${offers.content}"
-        th:style="${iStat.odd}? 'font-weight: bold;'"
-        th:alt-title="${iStat.even}? 'even' : 'odd'">
-        <td th:text="${offer.title}"></td>
-        <td th:text="${offer.company}"></td>
-        <td th:text="${offer.location}"></td>
-        <td th:text="${offer.minSalary}"></td>
-        <td th:text="${offer.maxSalary}"></td>
-        <td><a th:href="@{${offer.link}}">Link do ogłoszenia</a></td>
-    </tr>
-    </tfoot>
-</table>
+<section class="section">
+    <div class="columns is-centered">
+        <div class="column is-narrow">
+            <table class="table is-striped is-hoverable">
+                <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                    <th>Minimum Salary</th>
+                    <th>Maximum Salary</th>
+                    <th>Link</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr th:each="offer, iStat : ${offers.content}"
+                    th:style="${iStat.odd}? 'font-weight: bold;'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+                    <td th:text="${offer.title}"></td>
+                    <td th:text="${offer.company}"></td>
+                    <td th:text="${offer.location}"></td>
+                    <td th:text="${offer.minSalary}"></td>
+                    <td th:text="${offer.maxSalary}"></td>
+                    <td><a th:href="@{${offer.link}}">Link do ogłoszenia</a></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</section>
 
 <div th:style="'padding-left:10px;'"
      th:if="${offers.totalPages > 0}">

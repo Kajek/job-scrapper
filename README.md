@@ -31,8 +31,8 @@ Scrapping job offers for Junior Java Developer position from most popular servic
 - ☑️ Add pagination
 - ☑️ Deployment to heroku
 - ☑️ Add scraping from BulldogJob
-- ⬜ Add scraping from Pracuj.pl
 - ⬜ Switch from H2 to Postgres or MySQL if necessary
 - ⬜ Add scraping from JustJoinIt (dynamic site)
+- ⬜ Add scraping from Pracuj.pl (dynamic site)
 
 

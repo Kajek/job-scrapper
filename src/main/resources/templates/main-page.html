@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--<link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <head>
@@ -23,6 +22,10 @@
 
 <section class="section">
     <form method="get" th:action="@{/}">
+
+        <h2 class="title is-2 has-text-centered" th:text="'Today there are ' + ${offers.size} + ' potential offers'"></h2>
+
+        </div>
         <div class="buttons is-centered">
             <button class="button is-success is-rounded is-large" type="submit">All offers</button>
         </div>
@@ -35,16 +38,16 @@
 
 
             <label>
-                <input class="input is-primary is-medium" type="text" placeholder="City name / zdalna"
+                <input class="input is-primary is-medium has-text-centered" type="text" placeholder="City name / zdalna"
                        th:field="*{location}"/>
             </label>
 
             <label>
-                <input class="input is-primary is-medium" type="number" placeholder="Minimum salary"
+                <input class="input is-primary is-medium has-text-centered" type="number" placeholder="Minimum salary"
                        th:field="*{minSalary}"/>
             </label>
             <label>
-                <input class="input is-primary is-medium" type="number" placeholder="Maximum salary"
+                <input class="input is-primary is-medium has-text-centered" type="number" placeholder="Maximum salary"
                        th:field="*{maxSalary}"/>
             </label>
             <div>

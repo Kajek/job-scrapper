@@ -6,7 +6,7 @@ Scrapping job offers for Junior Java Developer position from most popular servic
 
 ## Demo
 
-[DEMO](https://simple-job-scraper.herokuapp.com/)
+[DEMO](https://simple-job-scraper.herokuapp.com/) - currently not working, since heroku changed service plan
 
 ## Tech stack
 
